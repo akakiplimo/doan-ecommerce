@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.env
+*.venv
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+*.sqlite3
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+static/
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# mypy
+.mypy_cache/
+
+# pipenv / poetry
+Pipfile.lock
+poetry.lock
+
+# Environment variables
+.env
+.env.*
+
+# coverage reports
+htmlcov/
+.coverage
+.cache
+
+# node (if using with front-end tools)
+node_modules/
