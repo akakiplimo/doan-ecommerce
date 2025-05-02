@@ -1,5 +1,4 @@
-import React from 'react';
-import CartPage from '../components/cart/CartPage';
+import CartPage from "../components/cart/CartPage";
 
 const CartPageWrapper = () => {
   return <CartPage />;
