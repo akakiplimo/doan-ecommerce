@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -11,36 +11,38 @@ import {
   Container,
   Alert,
   Paper,
-} from '@mui/material';
-import { LockReset } from '@mui/icons-material';
-import axios from 'axios';
+} from "@mui/material";
+import { LockReset } from "@mui/icons-material";
 
 const ResetPasswordPage = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [step, setStep] = useState(1);
   const [alertInfo, setAlertInfo] = useState({
     show: false,
-    message: '',
-    severity: 'info',
+    message: "",
+    severity: "info",
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
+
     try {
       // Here you would call the password reset API
       // For now, we'll just simulate success
       setStep(2);
       setAlertInfo({
         show: true,
-        message: 'If an account with that email exists, we have sent password reset instructions.',
-        severity: 'success',
+        message:
+          "If an account with that email exists, we have sent password reset instructions.",
+        severity: "success",
       });
-    } catch (error) {
+    } catch (error: any) {
       setAlertInfo({
         show: true,
-        message: error.response?.data?.message || 'An error occurred. Please try again.',
-        severity: 'error',
+        message:
+          error.response?.data?.message ||
+          "An error occurred. Please try again.",
+        severity: "error",
       });
     }
   };
@@ -50,12 +52,12 @@ const ResetPasswordPage = () => {
       <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockReset />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -63,13 +65,19 @@ const ResetPasswordPage = () => {
           </Typography>
 
           {alertInfo.show && (
-            <Alert severity={alertInfo.severity} sx={{ mt: 2, width: '100%' }}>
+            // @ts-ignore
+            <Alert severity={alertInfo.severity} sx={{ mt: 2, width: "100%" }}>
               {alertInfo.message}
             </Alert>
           )}
 
           {step === 1 ? (
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1, width: "100%" }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -91,7 +99,7 @@ const ResetPasswordPage = () => {
                 Send Reset Instructions
               </Button>
               <Grid container justifyContent="center">
-                <Grid item>
+                <Grid>
                   <Link component={RouterLink} to="/login" variant="body2">
                     Back to Login
                   </Link>
@@ -99,9 +107,10 @@ const ResetPasswordPage = () => {
               </Grid>
             </Box>
           ) : (
-            <Box sx={{ mt: 3, textAlign: 'center' }}>
+            <Box sx={{ mt: 3, textAlign: "center" }}>
               <Typography variant="body1" sx={{ mb: 3 }}>
-                Please check your email for instructions on how to reset your password.
+                Please check your email for instructions on how to reset your
+                password.
               </Typography>
               <Button
                 component={RouterLink}

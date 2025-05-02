@@ -1,7 +1,13 @@
-import React from 'react';
-import { Pagination as MuiPagination, Stack } from '@mui/material';
+import { Pagination as MuiPagination, Stack } from "@mui/material";
+import { PaginationProps as MuiPaginationProps } from "@mui/material/Pagination";
 
-const Pagination = ({ count, page, onChange }) => {
+interface PaginationProps {
+  count: number; // Total number of pages
+  page: number; // Current page
+  onChange: MuiPaginationProps["onChange"]; // Event handler for page change
+}
+
+const Pagination = ({ count, page, onChange }: PaginationProps) => {
   return (
     <Stack spacing={2} sx={{ my: 3 }}>
       <MuiPagination

@@ -1,6 +1,6 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { SetStateAction, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -14,52 +14,52 @@ import {
   Drawer,
   useMediaQuery,
   Button,
-} from '@mui/material';
-import { FilterList } from '@mui/icons-material';
-import { getProducts, getCategories } from '../../redux/slices/productSlice';
-import ProductCard from './ProductCard';
-import ProductFilter from './ProductFilter';
-import Loader from '../common/Loader';
+} from "@mui/material";
+import { FilterList } from "@mui/icons-material";
+import { getProducts, getCategories } from "../../redux/slices/productSlice";
+import ProductCard from "./ProductCard";
+import ProductFilter from "./ProductFilter";
+import Loader from "../common/Loader";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   const { products, categories, isLoading, pagination } = useSelector(
     (state: any) => state.products
   );
 
   const [page, setPage] = useState(1);
-  const [sorting, setSorting] = useState('');
+  const [sorting, setSorting] = useState("");
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [filters, setFilters] = useState({
-    category: '',
-    minPrice: '',
-    maxPrice: '',
-    search: '',
+    category: "",
+    minPrice: 0,
+    maxPrice: 0,
+    search: "",
   });
 
   // Parse URL query parameters
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const categoryParam = params.get('category');
-    const minPriceParam = params.get('minPrice');
-    const maxPriceParam = params.get('maxPrice');
-    const searchParam = params.get('search');
-    const pageParam = params.get('page');
-    const sortParam = params.get('ordering');
+    const categoryParam = params.get("category");
+    const minPriceParam = Number(params.get("minPrice"));
+    const maxPriceParam = Number(params.get("maxPrice"));
+    const searchParam = params.get("search");
+    const pageParam = params.get("page");
+    const sortParam = params.get("ordering");
 
     setFilters({
-      category: categoryParam || '',
-      minPrice: minPriceParam || '',
-      maxPrice: maxPriceParam || '',
-      search: searchParam || '',
+      category: categoryParam || "",
+      minPrice: minPriceParam || 0,
+      maxPrice: maxPriceParam || 0,
+      search: searchParam || "",
     });
 
     setPage(pageParam ? parseInt(pageParam) : 1);
-    setSorting(sortParam || '');
+    setSorting(sortParam || "");
   }, [location.search]);
 
   // Fetch products and categories
@@ -84,12 +84,22 @@ const ProductList = () => {
     updateUrl({ page: value });
   };
 
-  const handleSortChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+  const handleSortChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
     setSorting(event.target.value);
     updateUrl({ ordering: event.target.value, page: 1 });
   };
 
-  const handleFilterChange = (newFilters: SetStateAction<{ category: string; minPrice: string; maxPrice: string; search: string; }>) => {
+  const handleFilterChange = (
+    newFilters: SetStateAction<{
+      category: string;
+      minPrice: string;
+      maxPrice: string;
+      search: string;
+    }>
+  ) => {
+    // @ts-ignore
     setFilters({ ...filters, ...newFilters });
     updateUrl({ ...newFilters, page: 1 });
     if (isMobile) {
@@ -97,7 +107,7 @@ const ProductList = () => {
     }
   };
 
-  const updateUrl = (params: { [s: string]: unknown; } | ArrayLike<unknown>) => {
+  const updateUrl = (params: { [s: string]: unknown } | ArrayLike<unknown>) => {
     const searchParams = new URLSearchParams(location.search);
 
     // Update existing params or add new ones
@@ -120,7 +130,7 @@ const ProductList = () => {
   };
 
   if (isLoading && !products.length) {
-    return <Loader message='Loading Products...' />;
+    return <Loader message="Loading Products..." />;
   }
 
   return (
@@ -128,9 +138,9 @@ const ProductList = () => {
       <Box sx={{ mb: 4 }}>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             mb: 3,
           }}
         >
@@ -171,10 +181,11 @@ const ProductList = () => {
         <Grid container spacing={3}>
           {/* Filters - Desktop */}
           {!isMobile && (
-            <Grid size={{ xs: 12, md: 3}}>
+            <Grid size={{ xs: 12, md: 3 }}>
               <ProductFilter
                 categories={categories}
                 filters={filters}
+                // @ts-ignore
                 onFilterChange={handleFilterChange}
               />
             </Grid>
@@ -191,6 +202,7 @@ const ProductList = () => {
                 <ProductFilter
                   categories={categories}
                   filters={filters}
+                  // @ts-ignore
                   onFilterChange={handleFilterChange}
                 />
               </Box>
@@ -217,8 +229,8 @@ const ProductList = () => {
             {pagination.count > 0 && (
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   mt: 4,
                 }}
               >

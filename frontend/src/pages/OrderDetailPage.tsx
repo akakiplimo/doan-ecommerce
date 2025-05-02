@@ -1,5 +1,4 @@
-import React from 'react';
-import OrderDetails from '../components/orders/OrderDetails';
+import OrderDetails from "../components/orders/OrderDetails";
 
 const OrderDetailPage = () => {
   return <OrderDetails />;
