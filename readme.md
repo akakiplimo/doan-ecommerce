@@ -186,14 +186,17 @@ The frontend will be available at http://localhost:5173/ (or another port if 517
 ### Frontend
 
 The frontend of this project has been deployed to **Vercel**. It includes an environment variable that points to the backend API for seamless integration.
-[Frontend Link](https://doan-ecommerce.vercel.app/)
+
+<a href="https://doan-ecommerce.vercel.app/" target="_blank">Frontend Link</a>
 
 ### Backend
 
 The backend has been **dockerized** and deployed to a **Digital Ocean VPS** using Droplets. The deployment includes the following setup:
 
 - Requests are allowed only from the specific frontend host through its IP.
-- The backend is configured with **ngrok** to expose the API endpoint securely.[Backend Link](https://doan-commerce-api.duckdns.org/)
+- The backend is configured with **ngrok** to expose the API endpoint securely.
+
+<a href="https://doan-commerce-api.duckdns.org/admin" target="_blank">Django Admin Link</a>
 
 ### Environment Variables
 
